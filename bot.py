@@ -1,13 +1,14 @@
 import os
 import slack_sdk
+from dotenv import load_dotenv
 from time import time
-import newbieton
+#import newbieton1
 from slack_sdk import WebClient
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
-
-SLACK_APP_TOKEN = "xapp-1-A05778VB2ET-5245816739703-63094149998581b37cc106327f6aca1cb92e53580568c4d53dd29190ae450326"
-SLACK_BOT_TOKEN = "xoxb-5250661758005-5272492731361-DT5w5dOAYL2nhC1F1ksInpyZ"
+load_dotenv()
+SLACK_APP_TOKEN = os.getenv("SLACK_APP_TOKEN")
+SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 client = WebClient(token=SLACK_BOT_TOKEN)
 
 #SLACK_APP_SECRET = "SLACK_APP_SECRET"
@@ -66,7 +67,7 @@ def handle_app_mention(body, say, logger):
     trait.append(100)
     print(trait)
     say(' '.join(str(s) for s in trait))
-    newbieton.apply(trait)
+    #newbieton.apply(trait)
 
 def create_private_channel_and_invite_users(user1_id, user2_id):#U05858U6KFS,U058BG3CYN4
     print('start')
