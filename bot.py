@@ -1,7 +1,7 @@
 import os
 import slack_sdk
 from time import time
-#import newbieton
+import newbieton
 from slack_sdk import WebClient
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
@@ -39,7 +39,11 @@ def handle_app_mention(body, say, logger):
     if text[15:]=='매칭 도움' or text[15:]=='매칭도움' or text[15:]=='도움':
         say("<이름 잘하는과목 실력(1~9) 못하는과목 실력(1~9)> 의 형태로 입력해주세요!\n예시) @Veritas Luxmea 안시영 수학 9 국어 1")
         return
+    if text[15:19]=='간이매칭':
+        create_private_channel_and_invite_users(text[15:].split()[1][2:-1],text[15:].split()[2][2:-1])
+        return
     lis=text[15:].split()#안시영 수학 9 국어 1
+    print(text[15:])
     if len(lis) != 5:
         say('입력 오류')
         return
@@ -62,7 +66,7 @@ def handle_app_mention(body, say, logger):
     trait.append(100)
     print(trait)
     say(' '.join(str(s) for s in trait))
-    # user2_id = newbieton.apply(trait)
+    newbieton.apply(trait)
 
 def create_private_channel_and_invite_users(user1_id, user2_id):#U05858U6KFS,U058BG3CYN4
     print('start')
